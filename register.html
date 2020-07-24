@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="my.ico" type="image/x-icon"/>
+		<title>欢迎注册</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<!--animate动画库-->
+		<link
+		    rel="stylesheet"
+		    href="css/animate.min.css"
+		  />
+		<style type="text/css">
+			html{
+				height: 100%;
+			}
+			body{
+				
+				margin-top: 100px;
+				background-color: ;
+				 background-size: 100% 100%;
+				background-image: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%);
+			}
+		
+		</style>
+	<script type="text/javascript" src="js/jquery-3.5.1.js" ></script>
+	</head>
+	<body>
+			<script type="text/javascript">
+		function checkUsername(){
+			var username=$("#username").val();
+			var reg_username =/^\w{8,20}$/;
+			var flag=reg_username.test(username);
+			if(!flag){
+				//用户名非法
+				 $("#username").css("border","1px solid red");
+				
+			}else{
+				$("#username").css("border","");
+			}
+			return flag;
+		}
+		function checkPassword(){
+			var password=$("#password").val();
+			var reg_password =/^\w{8,20}$/;
+			var flag=reg_password.test(password);
+			if(!flag){
+				//用户名非法
+				 $("#password").css("border","1px solid red");
+				
+			}else{
+				$("#password").css("border","");
+			}
+			return flag;
+		}
+//		function checkEmail(){
+//			var email=$("#email").val();
+//			var reg_email =/^\w+@\w+\.\w+$/;
+//			var flag=reg_email.test(email);
+//			if(!flag){
+//				//用户名非法
+//				 $("#email").css("border","1px solid red");
+//				
+//			}else{
+//				$("#email").css("border","");
+//			}
+//			return flag;
+//		}
+		function checkName(){
+			var name=$("#name").val();
+			if(name==null||name.length==0){
+				$("#name").css("border","1px solid red");
+				return false;
+			}else{
+				$("#name").css("border","");
+				return true;
+			}
+		
+		}
+		function checkTelephone(){
+			var telephone=$("#telephone").val();
+			var reg_telephone=/^1\d{10}$/
+			var flag=reg_telephone.test(telephone);
+			
+			if(!flag){
+				$("#telephone").css("border","1px solid red");
+			}else{
+				$("#telephone").css("border","");
+			}
+			return flag;
+		}
+		function checkCode(){
+			var check=$("#check").val();
+			if(check==null||check.length==0){
+				$("#check").css("border","1px solid red");
+				return false;
+			}else{
+				$("#check").css("border","");
+				return true;
+			}
+		}
+	
+		$(function(){
+			$("#registerForm").submit(function(){
+				if( checkUsername()&checkPassword()&checkName()
+				&checkTelephone()&checkCode()){
+					//$(this).serialize() 将表单的数据进行序列化成字符串
+					$.post("RegisterUser",$(this).serialize(),function(e){
+						
+						console.log(e)
+						if(e.flag){
+							window.location="/travel/register_ok.html"
+						}
+					}) 
+				}
+				return false;
+			});
+			$("#username").blur(checkUsername);
+			$("#password").blur(checkPassword);
+//			$("#email").blur(checkEmail);
+			$("#name").blur(checkName);
+			$("#telephone").blur(checkTelephone);
+			$("#check").blur(checkCode);
+//			$("#birthday").blur(checkBirthDay);
+		});
+		</script>
+		<!--<div class="container-fluid">
+			<div class="row ">
+				<div class="col-md-1">
+				<img src="img/logo.jpg" class="img-responsive "/>
+				</div>
+			</div>
+			
+		</div>-->
+		
+		<div class="container animate__animated  animate__bounce" >
+			
+						<div class="panel panel-default col-md-5 col-md-offset-3">
+					  <div class="panel-heading" class="center-block" >
+					    <h3 class="panel-title text-center" ><b>欢迎注册系统</b></h3>
+					  </div>
+					  <div class="panel-body">
+					   	<form class="form-horizontal" id="registerForm" action="" method="post">
+						 	<div class="form-group">
+						    	<label for="username" class="col-md-3 col-xs-3 col-sm-3 col-lg-3 control-label">用户名</label>
+						    	<div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+						      		<input type="text"  class="form-control" id="username" name="username"  placeholder="用户名">
+						   		 </div>
+						   	 </div>
+						<div class="form-group">
+							<label for="password" class="control-label col-md-3 col-xs-3 col-sm-3 col-lg-3" >密码</label>
+							<div class="col-md-9 col-xs-9 col-sm-9 col-lg-9">
+								<input  type="password" id="password" name="password" placeholder="密码" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+						    	<label for="name" class="col-md-3 col-xs-3 col-sm-3 col-lg-3 control-label">姓名</label>
+						    	<div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+						      		<input type="text"  class="form-control" id="name" name="name"  placeholder="请输入您的姓名">
+						   		 </div>
+						   	 </div>
+						<div class="form-group ">
+			
+							<label for="telephone" class="control-label col-md-3 col-xs-3 col-sm-3 col-lg-3" >电话号码</label>
+							<div class="col-md-9 col-xs-9 col-sm-9 col-lg-9">
+								<div class="input-group">
+								<span class="input-group-addon">+86</span>
+								<input type="text" name="telephone" id="telephone" class="form-control" />
+								
+							</div>
+							</div>
+							
+							
+							<!--<div class="col-md-3 col-xs-3 col-sm-3 col-lg-3" style="margin-top: 5px;">
+								
+							</div>-->
+						</div>
+						
+						<div class="form-group ">
+							<label for="check" class="control-label col-md-3 col-xs-3 col-sm-3 col-lg-3">验证码</label>
+							<div class="col col-md-9 col-xs-9 col-sm-9 col-lg-9">
+								<div class="input-group">
+								<input type="text" class="form-control" id="check" name="check"/>
+								<span class="input-group-addon"><b><a style="text-decoration: none;">获取验证码</a></b></span>
+								</div>
+							</div>
+							<!--<div class="col col-md-5 col-xs-5 col-sm-5 col-lg-5">-->
+								<!--<img src="" alt="验证码"/>
+								
+							</div>-->
+						</div>
+						
+						<div class="form-group row">
+							<div class="col col-md-4 col-xs-4 col-sm-4 col-lg-4 col-md-offset-3 col-xs-offset-3 col-sm-offset-3 col-lg-offset-3">
+								<button type="submit" id="register"  class="btn btn-success ">注册</button>
+							</div> 
+								<div class="col col-md-4 col-xs-4 col-sm-4 col-lg-4 ">
+									<a   class="btn  btn-default " id="login" href="mylogin.html">返回登录</a>
+								</div>
+								
+						</div>
+						
+						
+						
+					</form>
+  </div>
+</div>
+					
+		</div>
+		<script type="text/javascript" src="js/jquery-3.5.1.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+	</body>
+</html>
